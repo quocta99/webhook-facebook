@@ -42,6 +42,8 @@ app.post('/webhook', function (req, res) {
                 // Nếu người dùng gửi tin nhắn đến
                 if (message.message.text) {
                     var text = message.message.text;
+
+                    console.log({text});
                     if (text == 'hi' || text == "hello") {
                         sendMessage(senderId, "Trung Quân's Bot: " + 'Xin Chào');
                     }
