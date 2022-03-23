@@ -34,22 +34,22 @@ app.post('/webhook', function (req, res) {
     var entries = req.body.entry;
 
     console.log(JSON.stringify(entries));
-    // for (var entry of entries) {
-    //     var messaging = entry.messaging;
-    //     for (var message of messaging) {
-    //         var senderId = message.sender.id;
-    //         if (message.message) {
-    //             // Nếu người dùng gửi tin nhắn đến
-    //             if (message.message.text) {
-    //                 var text = message.message.text;
-    //                 if (text == 'hi' || text == "hello") {
-    //                     sendMessage(senderId, "Trung Quân's Bot: " + 'Xin Chào');
-    //                 }
-    //                 else { sendMessage(senderId, "Trung Quân's Bot: " + "Xin lỗi, câu hỏi của bạn chưa có trong hệ thống, chúng tôi sẽ cập nhật sớm nhất."); }
-    //             }
-    //         }
-    //     }
-    // }
+    for (var entry of entries) {
+        var messaging = entry.messaging;
+        for (var message of messaging) {
+            var senderId = message.sender.id;
+            if (message.message) {
+                // Nếu người dùng gửi tin nhắn đến
+                if (message.message.text) {
+                    var text = message.message.text;
+                    if (text == 'hi' || text == "hello") {
+                        sendMessage(senderId, "Trung Quân's Bot: " + 'Xin Chào');
+                    }
+                    else { sendMessage(senderId, "Trung Quân's Bot: " + "Xin lỗi, câu hỏi của bạn chưa có trong hệ thống, chúng tôi sẽ cập nhật sớm nhất."); }
+                }
+            }
+        }
+    }
 
     res.status(200).send("OK");
 });
@@ -59,7 +59,7 @@ function sendMessage(senderId, message) {
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {
-            access_token: "lorem_api_secret",
+            access_token: "EAAG8QD1TDDcBAEGswIwQoow0jzW8wlMo7schDt32CaRarYSSjPtR4M6PpHS8wojn9aNjNbvIUHYQeP3cLShvhVs3IKY96KZC2fQRjf65JDSyQrZCZAMDmuonIgMFQZAXLO8mDTeKeVZCFRfldiOqQqYdeZAhBKuX3UdNYxsuZCMNZBDLaFyWx6BLK4URKdK0MRdgepdw5XDq1Xe795EJeF0WMyVZAO6LT9csbQZCFLOKWXrUbn6dYCVwg5p28YcPK3iqYZD",
         },
         method: 'POST',
         json: {
